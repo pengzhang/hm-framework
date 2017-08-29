@@ -1,0 +1,2 @@
+10:plugins.hmcore.router.RouterAnnotationsPlugin
+100:plugins.hmcore.accesslog.AccessLogPlugin
