@@ -29,6 +29,7 @@ public class AccessLogTask extends Job{
 			if(total != null) {
 				if(access.total > total) {
 					access.total += total;
+					Cache.set(key,access.total);
 				}else {
 					access.total = total;
 				}
