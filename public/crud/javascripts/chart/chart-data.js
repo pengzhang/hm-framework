@@ -37,31 +37,18 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 			]
 	
 		}
-
 	var pieData = [
 				{
-					value: 300,
+					value: new Number($("#mem-free").val())/1024/1024,
 					color:"#30a5ff",
 					highlight: "#62b9fb",
-					label: "Blue"
+					label: "空闲"
 				},
 				{
-					value: 50,
-					color: "#ffb53e",
-					highlight: "#fac878",
-					label: "Orange"
-				},
-				{
-					value: 100,
-					color: "#1ebfae",
-					highlight: "#3cdfce",
-					label: "Teal"
-				},
-				{
-					value: 120,
+					value: new Number($("#mem-total").val())/1024/1024,
 					color: "#f9243f",
 					highlight: "#f6495f",
-					label: "Red"
+					label: "已使用"
 				}
 
 			];
@@ -106,8 +93,8 @@ window.onload = function(){
 //	var chart3 = document.getElementById("doughnut-chart").getContext("2d");
 //	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {responsive : true
 //	});
-//	var chart4 = document.getElementById("pie-chart").getContext("2d");
-//	window.myPie = new Chart(chart4).Pie(pieData, {responsive : true
-//	});
+	var chart4 = document.getElementById("mem-pie-chart").getContext("2d");
+	window.myPie = new Chart(chart4).Pie(pieData, {responsive : true
+	});
 	
 };

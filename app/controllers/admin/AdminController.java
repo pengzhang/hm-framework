@@ -33,6 +33,7 @@ import play.mvc.Controller;
 import play.mvc.With;
 import plugins.hmcore.router.Get;
 import tasks.hmcore.SyncSystemSettingTask;
+import utils.hmcore.PZDate;
 
 @Login
 @With(AdminActionIntercepter.class)
@@ -45,7 +46,9 @@ public class AdminController extends Controller{
 	
 	@Get("/admin/cache/clear")
 	public static void clearCache() {
+		long access =  Cache.get(PZDate.today(), Long.class);
 		Cache.clear();
+		Cache.set(PZDate.today(), access);
 		flash.success("清除缓存成功");
 		redirect("/admin/info");
 	}
@@ -55,6 +58,11 @@ public class AdminController extends Controller{
 		PlayPlugin plugin = Play.pluginCollection.getPluginInstance(CorePlugin.class);
 		List status = Arrays.asList(plugin.getStatus().split("\n"));
 		render(status);
+	}
+	
+	@Get("/admin/access/count")
+	public static void adminAccessCount() {
+		renderJSON(Cache.get(PZDate.today()));
 	}
 	
 	@Get("/admin/config")

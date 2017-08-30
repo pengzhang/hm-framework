@@ -11,6 +11,7 @@ import play.mvc.Before;
 import play.mvc.Catch;
 import play.mvc.Controller;
 import play.mvc.Finally;
+import tasks.hmcore.AccessLogTask;
 
 public class AdminActionIntercepter extends Controller {
 
@@ -25,8 +26,7 @@ public class AdminActionIntercepter extends Controller {
 
 	@Before()
 	private static void actionBeforeProcess() {
-		//TODO 设置默认权限
-		checkLogin();
+		AccessLogTask.record();
 	}
 
 	@After
@@ -51,37 +51,5 @@ public class AdminActionIntercepter extends Controller {
     static void log() {
         //Logger.info("Response contains : " + response.out);
     }
-	
-	private static void checkLogin(){
-		String login = Play.configuration.getProperty("check.login", "disabled");
-		if(login.equals("enabled") && (session.get("username") == null)){
-			String login_url = Play.configuration.getProperty("login.url");
-			if(StringUtils.isEmpty(login_url)){
-				login_url = "/login";
-			}
-			try {
-				Class controller = Class.forName("controllers." + request.action.substring(0, request.action.lastIndexOf(".")));
-				if (controller.isAnnotationPresent(Login.class)) {
-					boolean flag = true;
-					String[] except = ((Login) controller.getAnnotation(Login.class)).unless();//排除的Action
-
-					for(String action : except){
-						if(request.actionMethod.equals(action)){
-							flag = false;
-						}
-					}
-
-					if(flag && StringUtils.isEmpty(session.get("uid"))){
-						redirect(login_url);
-					}
-				}
-			} catch (ClassNotFoundException e) {
-				notFound();
-			}
-
-		}
-	}
-	
-	
 
 }

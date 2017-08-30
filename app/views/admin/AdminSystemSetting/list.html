@@ -26,8 +26,9 @@
 #{set 'moreScripts'}
 	<script type="text/javascript">
 		$(function(){
-			$("#crud_add_btn").hide();
-			$("#crud_status_true_btn").hide();
+			$("#crud_add_btn").attr("href","/admin/config");
+			$("#crud_add_btn").html("全部系统配置");
+			$("#crud_status_true_btn").remove();
 		})
 	</script>
 #{/set}

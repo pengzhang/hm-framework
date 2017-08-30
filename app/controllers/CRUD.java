@@ -14,9 +14,13 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import com.google.gson.Gson;
+
 import annotation.hmcore.Exclude;
 import annotation.hmcore.For;
 import annotation.hmcore.Hidden;
+import models.hmcore.accesslog.AccessLog;
+import play.CorePlugin;
 import play.Logger;
 import play.Play;
 import play.data.binding.Binder;
@@ -27,7 +31,6 @@ import play.db.Model;
 import play.db.Model.Factory;
 import play.exceptions.TemplateNotFoundException;
 import play.libs.Crypto;
-import play.mvc.After;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Router;
@@ -45,8 +48,10 @@ public abstract class CRUD extends Controller {
         if (getControllerClass() == CRUD.class) {
             forbidden();
         }
+        Map<String, String> access = AccessLog.getAccessLogChart();
+        Map<String, Object> sys = new Gson().fromJson(Play.pluginCollection.getPluginInstance(CorePlugin.class).getJsonStatus(),Map.class);
         renderArgs.put("nav", "admin");
-        render("CRUD/index.html");
+        render("CRUD/index.html", access, sys);
     }
 
     public static void list(int page, String search, String searchFields, String orderBy, String order, boolean status) {

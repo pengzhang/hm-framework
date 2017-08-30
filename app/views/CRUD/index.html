@@ -17,13 +17,13 @@
        
 	<div class="row">
 		#{crud.types}
-		<div class="col-xs-6 col-md-4 col-lg-4">
+		<div class="col-xs-6 col-md-4 col-lg-3">
 			<div class="panel panel-blue panel-widget ">
 				<div class="row no-padding">
-					<div class="col-sm-3 col-lg-5 widget-left">
+					<div class="col-sm-4 col-lg-4 widget-left">
 						<em class="glyphicon glyphicon-book glyphicon-l"></em>
 					</div>
-					<div class="col-sm-9 col-lg-7 widget-right">
+					<div class="col-sm-8 col-lg-8 widget-right">
 						<div class="large">${type.count(null,null,null)}</div>
 						<div class="text-muted">&{type.name}</div>
 					</div>
@@ -34,13 +34,63 @@
 	</div><!--/.row-->
 	
 	<div class="row">
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">内存使用(最大使用内存${(sys.get('memory').get('total')/1024/1024).format('0.0')} MB)</div>
+				<div class="panel-body" style="height:180px">
+					<div class="canvas-wrapper">
+						<input id="mem-free" type="hidden" value="${sys.get('memory').get('free')}" />
+						<input id="mem-total" type="hidden" value="${sys.get('memory').get('total')}" />
+						<canvas class="main-chart" id="mem-pie-chart" style="max-height:160px; padding:10px 0;"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">系统运行时间</div>
+				<div class="panel-body" style="height:180px;    text-align: center;  padding-top: 50px;">
+					<span style="font-size:50px; text-align:center">${(sys.get('application').get('uptime')/1000/60/60).format('0.0')}小时</span>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">系统参数</div>
+				<div class="panel-body" style="height:180px; ">
+					<table class="table table-responsive">
+						<tr>
+							<td style="border:none;">Java版本</td>
+							<td style="border:none;">${sys.get('java').get('version')}</td>
+						</tr>
+						<tr>
+							<td>系统存储位置</td>
+							<td>${sys.get('application').get('path')}</td>
+						</tr>
+						<tr>
+							<td>线程池</td>
+							<td>${sys.get('pool').get('size')}</td>
+						</tr>
+						<tr>
+							<td>活动的线程</td>
+							<td>${sys.get('pool').get('active')}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">最近15天访问趋势</div>
 				<div class="panel-body">
 					<div class="canvas-wrapper">
-						<input type="hidden" id="chart_data_title" value="${chart_title}">
-						<input type="hidden" id="chart_data_content" value="${chart_content}">
+						<input type="hidden" id="chart_data_title" value="${access.get('title')}">
+						<input type="hidden" id="chart_data_content" value="${access.get('data')}">
 						<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
 					</div>
 				</div>
@@ -48,9 +98,10 @@
 		</div>
 	</div><!--/.row-->
 </div>	<!--/.main-->
+
 #{set 'moreScripts'}
 	<script src="/public/crud/javascripts/chart/chart.min.js"></script>
 	<script src="/public/crud/javascripts/chart/chart-data.js"></script>
 	<script src="/public/crud/javascripts/easypiechart/easypiechart.js"></script>
-	<script src="/public/crud/javascripts/easypiechart/easypiechart-data.js"></script>
+	<script src="/public/crud/javascripts/easypiechart/easypiechart-data.js"></script>\
 #{/set}

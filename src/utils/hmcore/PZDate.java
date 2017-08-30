@@ -1,4 +1,5 @@
 package utils.hmcore;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,6 +17,10 @@ public class PZDate {
 	
 	public static Date tomorrowTruncate(){
 		return dayTruncate(1);
+	}
+	
+	public static String today() {
+		return new SimpleDateFormat("yyyyMMdd").format(new Date());
 	}
 	
 	/**

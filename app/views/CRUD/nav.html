@@ -12,6 +12,7 @@
 				<li #{if nav=='admin'}class="active"#{/if}><a href="/admin">控制台</a></li>
 		        <li #{if nav=='setting'}class="active"#{/if}><a href="/admin/adminsystemsetting">配置中心</a></li>
 		        <li #{if nav=='cache'}class="active"#{/if}><a href="/admin/cache/clear">清理缓存</a></li>
+		        <li #{if nav=='status'}class="active"#{/if}><a href="/admin/status">系统状态</a></li>
 		        <li #{if nav=='doc'}class="active"#{/if}><a href="/admin/doc" target="_blank">文档中心</a></li>
 		        #{crud.types}
 			        <li #{if nav=='todo'}class="active"#{/if}>
