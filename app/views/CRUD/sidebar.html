@@ -5,7 +5,6 @@
 		</div>
 	</form>
 	<ul class="nav menu" style="margin-bottom:50px;">
-		#{list 0..10}
 		#{crud.types}
 			<li #{if type.name==menu}class="active"#{/if}>
 				<a href="${type.listAction}">
@@ -13,6 +12,5 @@
 				</a>
 			</li>
 		#{/crud.types}
-		#{/list}
 	</ul>
 </div><!--/.sidebar-->
