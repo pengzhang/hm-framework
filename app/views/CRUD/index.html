@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-xs-6 col-md-4 col-lg-4">
 			<div class="panel panel-default">
-				<div class="panel-heading">内存使用(最大使用内存${(sys.get('memory').get('total')/1024/1024).format('0.0')} MB)</div>
+				<div class="panel-heading">内存使用(最大使用内存${(sys.get('memory').get('max')/1024/1024).format('0.0')} MB)</div>
 				<div class="panel-body" style="height:180px">
 					<div class="canvas-wrapper">
 						<input id="mem-free" type="hidden" value="${sys.get('memory').get('free')}" />
