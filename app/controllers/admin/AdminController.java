@@ -1,42 +1,29 @@
 package controllers.admin;
 
 
-import static java.util.Arrays.asList;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.jamonapi.Monitor;
-import com.jamonapi.MonitorFactory;
-
+import annotation.hmcore.Check;
 import annotation.hmcore.Login;
 import controllers.AdminActionIntercepter;
+import controllers.Secure;
 import play.CorePlugin;
-import play.Invoker;
 import play.Play;
 import play.PlayPlugin;
 import play.cache.Cache;
-import play.cache.EhCacheImpl;
 import play.mvc.Controller;
 import play.mvc.With;
 import plugins.hmcore.router.Get;
-import tasks.hmcore.SyncSystemSettingTask;
 import utils.hmcore.PZDate;
 
 @Login
-@With(AdminActionIntercepter.class)
+@Check("")
+@With({AdminActionIntercepter.class,Secure.class})
 public class AdminController extends Controller{
 	
 	@Get("/admin/info")

@@ -2,18 +2,24 @@ package controllers;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import annotation.hmcore.Check;
 import annotation.hmcore.Login;
 import exceptions.hmcore.ServiceException;
 import models.hmcore.adminuser.AdminUser;
-import models.hmcore.adminuser.UserRole;
+import models.hmcore.adminuser.Permission;
+import models.hmcore.adminuser.Role;
 import play.Logger;
 import play.Play;
 import play.cache.Cache;
@@ -47,7 +53,7 @@ public class Secure extends Controller {
     	if(isCheck){
     		// Authent
     		if(!session.contains("username")) {
-    			flash.put("url", "GET".equals(request.method) ? request.url : Play.ctxPath + "/"); // seems a good default
+    			flash.put("url", "GET".equalsIgnoreCase(request.method) ? request.url : Play.ctxPath + "/"); // seems a good default
     			login();
     		}
     		// Checks
@@ -161,6 +167,8 @@ public class Secure extends Controller {
 		redirect(login_url);
 		
 	}
+	
+	
 
     // ~~~ Utils
 
@@ -201,8 +209,6 @@ public class Secure extends Controller {
     			if (user != null) {
     				session.put("user_id", user.id);
     				session.put("avatar", user.avatar);
-    				List<Long> rids = UserRole.find("select ur.role_id from UserRole ur where user_id=?", user.id).fetch();
-    				session.put("rids", rids);
     				return true;
     			}
     			return false;
@@ -222,20 +228,16 @@ public class Secure extends Controller {
         static boolean check(String profile) {
         	boolean flag = true;
     		try{
-    			//通过role_id获取缓存中的权限列表
-    			String rids = session.get("rids");
-    			for(String rid : rids.split(",")){
-    				List permissions = (List) Cache.get("rid:"+rid);
-    				//权限列表为空,认为没有任何权限
-    				if(permissions != null && permissions.size()>0){
-    					for(Object p : permissions){
-    						Field action = p.getClass().getField("action");
-    						Field action_url = p.getClass().getField("action_url");
-    						//只有action和action_url全部匹配时通过
-    						if(request.actionMethod.equals((String)action.get(p)) && request.path.equals((String)action_url.get(p))){
-    							flag = false;
-    							break;
-    						}
+    			Long user_id = NumberUtils.toLong(session.get("user_id"));
+    			AdminUser user = AdminUser.findById(user_id);
+    			if(user.username.equals("admin")) {
+    				return true;
+    			}
+    			for(Role role: user.roles) {
+    				for(Permission permission: role.permissions) {
+    					if(request.action.equals(permission.action) ){
+    						flag = false;
+    						break;
     					}
     				}
     			}

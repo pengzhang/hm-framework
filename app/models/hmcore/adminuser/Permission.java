@@ -32,4 +32,11 @@ public class Permission extends BaseModel implements Serializable {
 		this.action = action;
 		this.action_url = action_url;
 	}
+
+	@Override
+	public String toString() {
+		return permission_name ;
+	}
+
+
 }

@@ -1,14 +1,9 @@
 package tasks.hmcore;
 
-import java.util.List;
-
 import models.hmcore.accesslog.AccessLog;
-import models.hmcore.setting.SystemSetting;
-import play.Play;
 import play.cache.Cache;
 import play.jobs.Every;
 import play.jobs.Job;
-import play.jobs.OnApplicationStart;
 import utils.hmcore.PZDate;
 
 /**

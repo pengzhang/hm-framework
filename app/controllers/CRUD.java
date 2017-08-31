@@ -20,7 +20,6 @@ import annotation.hmcore.Exclude;
 import annotation.hmcore.For;
 import annotation.hmcore.Hidden;
 import models.hmcore.accesslog.AccessLog;
-import play.CorePlugin;
 import play.Logger;
 import play.Play;
 import play.data.binding.Binder;
@@ -34,8 +33,11 @@ import play.libs.Crypto;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Router;
+import play.mvc.With;
 import play.utils.Java;
+import utils.hmcore.SystemStatus;
 
+@With(Secure.class)
 public abstract class CRUD extends Controller {
 
     @Before
@@ -49,7 +51,7 @@ public abstract class CRUD extends Controller {
             forbidden();
         }
         Map<String, String> access = AccessLog.getAccessLogChart();
-        Map<String, Object> sys = new Gson().fromJson(Play.pluginCollection.getPluginInstance(CorePlugin.class).getJsonStatus(),Map.class);
+        Map<String, Object> sys = new Gson().fromJson(SystemStatus.getJsonStatus().toString(),Map.class);
         renderArgs.put("nav", "admin");
         render("CRUD/index.html", access, sys);
     }
@@ -148,15 +150,6 @@ public abstract class CRUD extends Controller {
         			}
 
         		}
-//        		if (f.getName().equals("user_id")) {
-//        			f.set(object, NumberUtils.toLong(session.get("user_id")));
-//        		}
-//        		if (f.getName().equals("username")) {
-//        			f.set(object, session.get("username"));
-//        		}
-//        		if (f.getName().equals("avatar")) {
-//        			f.set(object, session.get("avatar"));
-//        		}
         		if( f.getName().equals("updateDate")){
         			f.set(object, new Date());
         		}
@@ -207,15 +200,6 @@ public abstract class CRUD extends Controller {
 	        if( f.isAnnotationPresent(Password.class)){
 	        	f.set(object, Crypto.passwordHash(StringUtils.defaultString((String)f.get(object),"")));
 	        }
-	        if (f.getName().equals("user_id")) {
-				f.set(object, NumberUtils.toLong(session.get("user_id")));
-			}
-			if (f.getName().equals("username")) {
-				f.set(object, session.get("username"));
-			}
-			if (f.getName().equals("avatar")) {
-				f.set(object, session.get("avatar"));
-			}
         }
         object._save();
         flash.success(play.i18n.Messages.get("crud.created", type.modelName));
@@ -236,6 +220,7 @@ public abstract class CRUD extends Controller {
         try {
             object._delete();
         } catch (Exception e) {
+        	e.printStackTrace();
             flash.error(play.i18n.Messages.get("crud.delete.error", type.modelName));
             redirect(request.controller + ".show", object._key());
         }

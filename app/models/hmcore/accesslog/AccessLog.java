@@ -36,7 +36,7 @@ public class AccessLog extends Model{
 	
 	public static Map<String, String> getAccessLogChart(){
 		Map<String, String> chart = new HashMap<>();
-		List<AccessLog> accessLogs = AccessLog.find("order by id DESC").fetch(15);
+		List<AccessLog> accessLogs = AccessLog.find("order by accessDate ASC").fetch(15);
 		
 		List<String> title = new ArrayList<>();
 		for(AccessLog log : accessLogs) {

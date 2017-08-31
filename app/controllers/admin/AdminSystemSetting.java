@@ -7,10 +7,12 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import annotation.hmcore.Check;
 import annotation.hmcore.For;
 import annotation.hmcore.Login;
 import controllers.AdminActionIntercepter;
 import controllers.CRUD;
+import controllers.Secure;
 import controllers.CRUD.ObjectType;
 import models.hmcore.setting.SystemSetting;
 import play.Logger;
@@ -23,8 +25,9 @@ import play.libs.Crypto;
 import play.mvc.With;
 
 @Login
+@Check("")
 @For(SystemSetting.class)
-@With(AdminActionIntercepter.class)
+@With({AdminActionIntercepter.class,Secure.class})
 public class AdminSystemSetting extends CRUD {
 	
 }

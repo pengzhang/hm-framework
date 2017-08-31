@@ -1,9 +1,14 @@
 package models.hmcore.adminuser;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import models.BaseModel;
@@ -28,6 +33,9 @@ public class AdminUser extends BaseModel implements Serializable {
 
 	@Column(columnDefinition = "varchar(1000) comment '用户头像'")
 	public String avatar;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.REFRESH)
+	public List<Role> roles = new ArrayList<Role>();
 
 	public AdminUser() {
 		super();

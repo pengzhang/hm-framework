@@ -1,11 +1,18 @@
 package controllers;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import annotation.hmcore.Login;
 import exceptions.hmcore.ControllerException;
+import models.hmcore.adminuser.Permission;
 import play.Logger;
 import play.Play;
+import play.cache.Cache;
 import play.mvc.After;
 import play.mvc.Before;
 import play.mvc.Catch;
@@ -51,5 +58,5 @@ public class AdminActionIntercepter extends Controller {
     static void log() {
         //Logger.info("Response contains : " + response.out);
     }
-
+	
 }
