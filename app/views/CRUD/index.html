@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-xs-6 col-md-4 col-lg-4">
 			<div class="panel panel-default">
-				<div class="panel-heading">内存使用(最大使用内存${(sys.get('memory').get('max')/1024/1024).format('0.0')} MB)</div>
+				<div class="panel-heading">内存使用(${(sys.get('memory').get('max')/1024/1024).format('0.0')} MB)</div>
 				<div class="panel-body" style="height:180px">
 					<div class="canvas-wrapper">
 						<input id="mem-free" type="hidden" value="${sys.get('memory').get('free')}" />
@@ -59,7 +59,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">系统参数</div>
 				<div class="panel-body" style="height:180px; ">
-					<table class="table table-responsive">
+					<table class="table">
 						<tr>
 							<td style="border:none;">Java版本</td>
 							<td style="border:none;">${sys.get('java').get('version')}</td>
@@ -72,7 +72,7 @@
 							<td>线程池</td>
 							<td>${sys.get('pool').get('size')}</td>
 						</tr>
-						<tr>
+						<tr class="visible-lg">
 							<td>活动的线程</td>
 							<td>${sys.get('pool').get('active')}</td>
 						</tr>
