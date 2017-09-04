@@ -112,6 +112,8 @@ permission_name=权限名称
 action=操作Action
 action_url=权限URL
 
+UserController=用户管理
+sex=性别
 
 
 

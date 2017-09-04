@@ -22,15 +22,6 @@ import tasks.hmcore.AccessLogTask;
 
 public class AdminActionIntercepter extends Controller {
 
-	/*
-	 * Custom Configuration
-	  #Check User Login
-	  check.login=enabled
-	  login.url=http://user.hm55.cn/login
-	  #Check User Permission  
-	  check.permission=enabled
-	 */
-
 	@Before()
 	private static void actionBeforeProcess() {
 		AccessLogTask.record();
@@ -56,7 +47,6 @@ public class AdminActionIntercepter extends Controller {
 	
 	@Finally
     static void log() {
-        //Logger.info("Response contains : " + response.out);
     }
 	
 }

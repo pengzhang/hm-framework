@@ -57,12 +57,17 @@ public class InitDataTask extends Job{
 	public static void initAccessLog() {
 		List<SystemSetting> sets = SystemSetting.findAll();
 		if(sets.size() == 0) {
-			new SystemSetting("accesslog.log2play", "true").save();
-			new SystemSetting("accesslog.logpost", "true").save();
-			new SystemSetting("accesslog.path", "logs/access.log").save();
-//			new SystemSetting("check.login","enabled").save();
-//			new SystemSetting("login.url","/login").save();
-//			new SystemSetting("check.permission","disabled").save();
+			//上传类型
+			new SystemSetting("attachments.type", "local").save();
+			new SystemSetting("image.server.domain", "http://127.0.0.1:9000").save();
+			
+			//七牛云存储
+			new SystemSetting("qiniu.access_key", "").save();
+			new SystemSetting("qiniu.secret_key", "").save();
+			new SystemSetting("qiniu.bucketname", "").save();
+			new SystemSetting("qiniu.domain", "").save();
+			
+			
 		}else {
 			for(SystemSetting set : sets) {
 				Play.configuration.setProperty(set.settingKey, set.settingValue);

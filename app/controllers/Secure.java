@@ -20,6 +20,7 @@ import exceptions.hmcore.ServiceException;
 import models.hmcore.adminuser.AdminUser;
 import models.hmcore.adminuser.Permission;
 import models.hmcore.adminuser.Role;
+import models.hmcore.user.User;
 import play.Logger;
 import play.Play;
 import play.cache.Cache;
@@ -205,7 +206,15 @@ public class Secure extends Controller {
          */
         static boolean authenticate(String username, String password) {
         	try {
-        		AdminUser user = AdminUser.find("username=? and password=? and status=?", username, Crypto.passwordHash(password), false).first();
+        		User user = User.find("username=? and password=? and status=?", username, Crypto.passwordHash(password), false).first();
+        		if(user == null) {
+        			AdminUser admin = AdminUser.find("username=? and password=? and status=?", username, Crypto.passwordHash(password), false).first();
+        			if (admin != null) {
+        				session.put("user_id", admin.id);
+        				session.put("avatar", admin.avatar);
+        				return true;
+        			}
+        		}
     			if (user != null) {
     				session.put("user_id", user.id);
     				session.put("avatar", user.avatar);
