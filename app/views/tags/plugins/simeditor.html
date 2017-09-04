@@ -1,0 +1,44 @@
+<!-- 使用方式 -->
+<!-- #{plugins.simeditor editor:'object_id'/} -->
+
+<link rel="stylesheet"  href="/public/plugins/simditor/simditor.css">
+<link rel="stylesheet"  href="/public/plugins/simditor/simditor-html.css"> 
+<script type="text/javascript" src="/public/plugins/simditor/module.js"></script>
+<script type="text/javascript" src="/public/plugins/simditor/hotkeys.js"></script>
+<script type="text/javascript" src="/public/plugins/simditor/uploader.js"></script>
+<script type="text/javascript" src="/public/plugins/simditor/simditor.js"></script>
+<script type="text/javascript" src="/public/plugins/simditor/beautify-html.js"></script>
+<script type="text/javascript" src="/public/plugins/simditor/simditor-html.js"></script>
+
+<script type="text/javascript">
+$(function() {
+    var content = new Simditor({
+        textarea: $('#${_editor}'),
+        toolbar: ['title',
+                  'bold',
+                  'italic',
+                  'underline',
+                  'strikethrough',
+                  'color',
+                  'ol',             
+                  'ul',             
+                  'blockquote',
+                  'code',           
+                  'table',
+                  'link',
+                  'image',
+                  'hr',            
+                  'indent',
+                  'outdent',
+                  'alignment'
+                  ],
+        upload : {  
+        	url : '/upload', //文件上传的接口地址  
+            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交  
+            fileKey: 'file', //服务器端获取文件数据的参数名  
+            connectionCount: 3,  
+            leaveConfirm: '正在上传文件'  
+        }
+      });
+  });
+</script>
