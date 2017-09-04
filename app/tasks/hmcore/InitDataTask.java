@@ -68,6 +68,25 @@ public class InitDataTask extends Job{
 			new SystemSetting("qiniu.domain", "").save();
 			
 			
+			//微信配置
+			new SystemSetting("wechat.wxpay_appid", "").save();
+			new SystemSetting("wechat.wxpay_appsecret", "").save();
+			new SystemSetting("wechat.wxpay_mchid", "").save();
+			new SystemSetting("wechat.wxpay_key", "").save();
+			new SystemSetting("wechat.wxpay_curl_proxy_host", "").save();
+			new SystemSetting("wechat.wxpay_curl_proxy_port", "").save();
+			new SystemSetting("wechat.wxpay_report_levenl", "").save();
+			new SystemSetting("wechat.wxpay_sslcert_path", "").save();
+			new SystemSetting("wechat.wxpay_sslkey_path", "").save();
+			new SystemSetting("wechat.wxpay_sslrootca_path", "").save();
+			new SystemSetting("wechat.wxpay_notify_url", "").save();
+			new SystemSetting("wechat.wxpay_domain", "").save();
+			
+
+			
+			
+			
+			
 		}else {
 			for(SystemSetting set : sets) {
 				Play.configuration.setProperty(set.settingKey, set.settingValue);
