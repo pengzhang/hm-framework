@@ -3,6 +3,7 @@ package controllers.common;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -28,6 +29,9 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.Json;
 import com.qiniu.util.StringMap;
 
+import annotation.hmcore.Api;
+import annotation.hmcore.Param;
+import annotation.hmcore.Return;
 import models.hmcore.assist.Attachment;
 import models.hmcore.common.ResponseData;
 import models.hmcore.common.Simditor;
@@ -47,6 +51,7 @@ public class Assist extends Controller {
 	/**
 	 * 验证码
 	 */
+	@Api(name = "验证码", type = Api.HttpType.GET, url = "/captcha", ret={@Return(clazz=InputStream.class)})
 	@Get("/captcha")
 	public static void captcha() {
 		Images.Captcha captcha = Images.captcha();
@@ -63,6 +68,7 @@ public class Assist extends Controller {
 	 * @param code
 	 */
 	@Post("/qrcode")
+	@Api(name = "生成二维码", type = Api.HttpType.POST, url = "/qrcode", param= {@Param(clazz=String.class, name="code")}, ret={@Return(clazz=InputStream.class)})
 	public static void qrcode(String code) {
 		response.setContentTypeIfNotSet("image/png");
 		try {
@@ -80,6 +86,7 @@ public class Assist extends Controller {
 	 * @param file
 	 */
 	@Post("/upload")
+	@Api(name = "文件上传", type = Api.HttpType.POST, url = "/upload", param= {@Param(clazz=File.class, name="file")}, ret={@Return(clazz=Simditor.class)})
 	public static void upload(File file) {
 		String ATTACHMENTS_TYPE = Play.configuration.getProperty("attachments.type");
 		if(ATTACHMENTS_TYPE.equalsIgnoreCase("local")){

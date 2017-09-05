@@ -13,6 +13,10 @@ public class Simditor {
 	public String msg;
 	public String file_path;
 
+	public Simditor() {
+		super();
+	}
+	
 	public Simditor(Boolean success, String msg, String file_path) {
 		this.success = success;
 		this.msg = msg;
