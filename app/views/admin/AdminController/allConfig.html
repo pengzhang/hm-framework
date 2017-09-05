@@ -17,7 +17,7 @@
 					  #{list items:obj, as:'item'}
 					   <tr>
 			          	<td>${item.key}</td>
-			          	<td>${item.value}</td>
+			          	<td>${item.value?item.value:'暂无设置'}</td>
 			           </tr>
 					  #{/list}
 					  #{/list}

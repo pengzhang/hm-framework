@@ -1,5 +1,6 @@
 package tasks.hmcore;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,41 +57,42 @@ public class InitDataTask extends Job{
 	 */
 	public static void initAccessLog() {
 		List<SystemSetting> sets = SystemSetting.findAll();
-		if(sets.size() == 0) {
-			//上传类型
-			new SystemSetting("attachments.type", "local").save();
-			new SystemSetting("image.server.domain", "http://127.0.0.1:9000").save();
-			
-			//七牛云存储
-			new SystemSetting("qiniu.access_key", "").save();
-			new SystemSetting("qiniu.secret_key", "").save();
-			new SystemSetting("qiniu.bucketname", "").save();
-			new SystemSetting("qiniu.domain", "").save();
-			
-			
-			//微信配置
-			new SystemSetting("wechat.wxpay_appid", "").save();
-			new SystemSetting("wechat.wxpay_appsecret", "").save();
-			new SystemSetting("wechat.wxpay_mchid", "").save();
-			new SystemSetting("wechat.wxpay_key", "").save();
-			new SystemSetting("wechat.wxpay_curl_proxy_host", "").save();
-			new SystemSetting("wechat.wxpay_curl_proxy_port", "").save();
-			new SystemSetting("wechat.wxpay_report_levenl", "").save();
-			new SystemSetting("wechat.wxpay_sslcert_path", "").save();
-			new SystemSetting("wechat.wxpay_sslkey_path", "").save();
-			new SystemSetting("wechat.wxpay_sslrootca_path", "").save();
-			new SystemSetting("wechat.wxpay_notify_url", "").save();
-			new SystemSetting("wechat.wxpay_domain", "").save();
-			
 
-			
-			
-			
-			
-		}else {
-			for(SystemSetting set : sets) {
-				Play.configuration.setProperty(set.settingKey, set.settingValue);
-			}
+		List<String> keys = new ArrayList<String>();
+		for(SystemSetting set : sets) {
+			keys.add(set.settingKey);
+			Play.configuration.setProperty(set.settingKey, set.settingValue);
+		}
+
+		//上传类型
+		setSetting(keys,"attachments.type", "local");
+		setSetting(keys,"image.server.domain", "http://127.0.0.1:9000");
+
+		//七牛云存储
+		setSetting(keys,"qiniu.access_key", "");
+		setSetting(keys,"qiniu.secret_key", "");
+		setSetting(keys,"qiniu.bucketname", "");
+		setSetting(keys,"qiniu.domain", "");
+
+		//微信配置
+		setSetting(keys,"wechat.wxpay_appid", "");
+		setSetting(keys,"wechat.wxpay_appsecret", "");
+		setSetting(keys,"wechat.wxpay_mchid", "");
+		setSetting(keys,"wechat.wxpay_key", "");
+		setSetting(keys,"wechat.wxpay_curl_proxy_host", "");
+		setSetting(keys,"wechat.wxpay_curl_proxy_port", "");
+		setSetting(keys,"wechat.wxpay_report_levenl", "");
+		setSetting(keys,"wechat.wxpay_sslcert_path", "");
+		setSetting(keys,"wechat.wxpay_sslkey_path", "");
+		setSetting(keys,"wechat.wxpay_sslrootca_path", "");
+		setSetting(keys,"wechat.wxpay_notify_url", "");
+		setSetting(keys,"wechat.wxpay_domain", "");
+	}
+
+	private static void setSetting(List keys, String key, String value) {
+		if(!keys.contains(key)) {
+			new SystemSetting(key, value).save();
+			Play.configuration.setProperty(key, value);
 		}
 	}
 

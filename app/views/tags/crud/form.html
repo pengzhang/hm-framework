@@ -16,6 +16,8 @@
         _body.setProperty('fieldsHandler', fieldsHandler);
         _body.toString(); // we skeep the real result ...
     }
+    
+    def scripts = ''
 }%
 
 #{list items:_fields ?: currentType.fields*.name, as:'fieldName'}
@@ -57,6 +59,7 @@
 
         #{if field.type == 'longtext'}
             #{crud.longtextField name:field.name, value:(currentObject ? currentObject[field.name] : null) /}
+            %{scripts += get('script') }%
         #{/if}
 
         #{if field.type == 'number'}
@@ -76,6 +79,11 @@
         #{if field.type == 'boolean'}
             #{crud.checkField name:field.name, value:(currentObject ? currentObject[field.name] : null) /}
         #{/if}
+        
+        #{if field.type == 'upload'}
+            #{crud.uploadField name:field.name, value:(currentObject ? currentObject[field.name] : null) /}
+            %{scripts += get('script') }%
+        #{/if}
 
         #{if field.type == 'enum'}
             #{crud.enumField name:field.name, value:(currentObject ? currentObject[field.name] : null), property:field /}
@@ -84,6 +92,7 @@
         #{if field.type == 'hidden'}
             #{crud.hiddenField name:field.name, value:(currentObject ? currentObject[field.name] : null) /}
         #{/if}
+        
 	<p class="help-block">
 	    <span class="crudHelp">
 	        &{am}
@@ -134,3 +143,6 @@
 
 </div>
 #{/list}
+#{set 'moreScripts'}
+	${scripts.raw()}
+#{/set}

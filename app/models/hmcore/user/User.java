@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import annotation.hmcore.Hidden;
+import annotation.hmcore.Upload;
 import models.BaseModel;
 import play.data.validation.Password;
 
@@ -28,6 +29,7 @@ public class User extends BaseModel implements Serializable {
 	@Column(columnDefinition="varchar(30) comment '手机号'")
 	public String mobile;
 	
+	@Upload
 	@Column(columnDefinition="varchar(1000) comment '用户头像'")
 	public String avatar;
 	

@@ -11,7 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import annotation.hmcore.Upload;
 import models.BaseModel;
+import play.data.validation.MaxSize;
 import play.data.validation.Password;
 
 @Entity
@@ -31,6 +33,7 @@ public class AdminUser extends BaseModel implements Serializable {
 	@Column(columnDefinition = "varchar(30) comment '手机号'")
 	public String mobile;
 
+	@Upload
 	@Column(columnDefinition = "varchar(1000) comment '用户头像'")
 	public String avatar;
 	

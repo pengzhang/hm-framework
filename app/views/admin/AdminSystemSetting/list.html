@@ -9,6 +9,14 @@
 			
 			    <div id="crudListTable">
 			        #{crud.table fields:['id','settingKey','settingValue','operation']}
+			        	#{crud.custom 'settingValue'}
+				     		#{if object.settingValue}
+				     			${object.settingValue}
+				     		#{/if}
+				     		#{else}
+				     			暂无设置
+				     		#{/else}
+				     	#{/crud.custom}
 			        	#{crud.custom 'operation'}
 				     		<a class="btn btn-info btn-sm" href="@{show(object._key())}">编辑</a>
 				     	#{/crud.custom}

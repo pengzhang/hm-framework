@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 import com.google.gson.Gson;
 
 import annotation.hmcore.Exclude;
 import annotation.hmcore.For;
 import annotation.hmcore.Hidden;
+import annotation.hmcore.Upload;
 import models.hmcore.accesslog.AccessLog;
 import play.Logger;
 import play.Play;
@@ -487,6 +487,9 @@ public abstract class CRUD extends Controller {
                 }
                 if (field.isAnnotationPresent(Exclude.class)) {
                     type = null;
+                }
+                if (field.isAnnotationPresent(Upload.class)) {
+                    type = "upload";
                 }
                 if (java.lang.reflect.Modifier.isFinal(field.getModifiers())) {
                     type = null;

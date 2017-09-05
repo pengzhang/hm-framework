@@ -82,7 +82,7 @@ public class Assist extends Controller {
 	@Post("/upload")
 	public static void upload(File file) {
 		String ATTACHMENTS_TYPE = Play.configuration.getProperty("attachments.type");
-		if(StringUtils.isEmpty(ATTACHMENTS_TYPE)){
+		if(ATTACHMENTS_TYPE.equalsIgnoreCase("local")){
 			localUpload(file);
 		}else if(ATTACHMENTS_TYPE.equalsIgnoreCase("qiniu")){
 			qiniuUpload(file);
