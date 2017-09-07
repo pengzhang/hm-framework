@@ -12,6 +12,7 @@ require:
     - com.aliyun -> aliyun-java-sdk-sms 3.0.0-rc1
     - commons-httpclient 3.0.1
     - org.apache.httpcomponents -> httpclient 4.5.1
+    - eu.bitwalker -> UserAgentUtils 1.20
     
 repositories:
     - jboss:
@@ -25,3 +26,4 @@ repositories:
             - com.aliyun -> *
             - commons-httpclient -> *
             - org.apache.httpcomponents -> *
+            - eu.bitwalker -> *

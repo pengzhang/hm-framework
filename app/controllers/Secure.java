@@ -38,7 +38,7 @@ public class Secure extends Controller {
 
     @Before()
     static void checkAccess() throws Throwable {
-    	String[] unless = {"login", "authenticate", "logout"};
+    	String[] unless = {"login", "authenticate", "logout","register","registerAction"};
     	boolean isCheck = true;
     	
     	//检查标示Login注解的类
@@ -84,7 +84,7 @@ public class Secure extends Controller {
     }
 
     // ~~~ Login
-    @Get("/login")
+    @Get("/admin/login")
     public static void login() throws Throwable {
         Http.Cookie remember = request.cookies.get("rememberme");
         if(remember != null) {
@@ -110,7 +110,7 @@ public class Secure extends Controller {
         render();
     }
     
-    @Post("/login")
+    @Post("/admin/login")
     public static void authenticate(@Required String username, String password, boolean remember) throws Throwable {
         // Check tokens
         Boolean allowed = false;
@@ -141,7 +141,7 @@ public class Secure extends Controller {
         redirectToOriginalURL();
     }
     
-    @Get("/logout")
+    @Get("/admin/logout")
     public static void logout() throws Throwable {
         Security.invoke("onDisconnect");
         session.clear();
@@ -151,21 +151,25 @@ public class Secure extends Controller {
         login();
     }
     
-    @Get("/register")
+    @Get("/admin/register")
 	public static void register(){
 		render();
 	}
 	
-	@Post("/register")
-	public static void registerAction(String username, String password){
+	@Post("/admin/register")
+	public static void registerAction(String username, String password, String vcode){
+		
+		Object cvcode = Cache.get(vcode);
+		if(vcode == null || cvcode == null) {
+			flash.put("vcode_error", "验证码错误");
+			params.flash();
+			register();
+		}
+		
 		//密码加密
 		password = Crypto.passwordHash(password);
 		new AdminUser(username, password).save();
-		String login_url = Play.configuration.getProperty("login.url");
-		if(StringUtils.isEmpty(login_url)){
-			login_url = "/login";
-		}
-		redirect(login_url);
+		redirect("/admin/login");
 		
 	}
 	
@@ -177,7 +181,7 @@ public class Secure extends Controller {
         Security.invoke("onAuthenticated");
         String url = flash.get("url");
         if(url == null) {
-            url = Play.ctxPath + "/";
+            url = Play.ctxPath + "/admin";
         }
         redirect(url);
     }

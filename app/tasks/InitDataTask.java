@@ -87,6 +87,12 @@ public class InitDataTask extends Job{
 		setSetting(keys,"wechat.wxpay_sslrootca_path", "");
 		setSetting(keys,"wechat.wxpay_notify_url", "");
 		setSetting(keys,"wechat.wxpay_domain", "");
+		
+		setSetting(keys,"wechat.login", "true");
+		setSetting(keys,"wechat.snsapi", "base");
+		setSetting(keys,"wechat.loginneed", "true");
+		setSetting(keys,"wechat.binduser", "false");
+		
 	}
 
 	private static void setSetting(List keys, String key, String value) {

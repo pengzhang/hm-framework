@@ -140,7 +140,10 @@ wechat.wxpay_sslkey_path=微信支付SSLKey路径
 wechat.wxpay_sslrootca_path=微信支付SSL根CA路径
 wechat.wxpay_notify_url=微信支付通知回调地址
 wechat.wxpay_domain=微信支付域名
-
+wechat.login=支持微信登录
+wechat.loginneed=仅支持微信访问
+wechat.snsapi=微信登录授权方式
+wechat.binduser=支持微信绑定
 
 
 
