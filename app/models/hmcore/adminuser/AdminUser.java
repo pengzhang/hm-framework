@@ -11,7 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import annotation.hmcore.Upload;
+import annotations.Upload;
 import models.BaseModel;
 import play.data.validation.MaxSize;
 import play.data.validation.Password;

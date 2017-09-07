@@ -6,7 +6,7 @@ import play.mvc.Before;
 import play.mvc.Catch;
 import play.mvc.Controller;
 import play.mvc.Finally;
-import tasks.hmcore.AccessLogTask;
+import tasks.AccessLogTask;
 
 public class ActionIntercepter extends Controller {
 

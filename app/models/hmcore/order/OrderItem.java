@@ -6,8 +6,8 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import annotation.hmcore.Hidden;
-import annotation.hmcore.Price;
+import annotations.Hidden;
+import annotations.Price;
 import models.BaseModel;
 import play.data.validation.Required;
 

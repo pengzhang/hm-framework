@@ -9,6 +9,9 @@
 			
 			    <div id="crudListTable">
 			        #{crud.table fields:['id','settingKey','settingValue','operation']}
+			        	#{crud.custom 'settingKey'}
+			        		&{object.settingKey}
+			        	#{/crud.custom}
 			        	#{crud.custom 'settingValue'}
 				     		#{if object.settingValue}
 				     			${object.settingValue}

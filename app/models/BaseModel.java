@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import annotation.hmcore.Exclude;
+import annotations.Exclude;
 import play.db.jpa.Model;
 
 /**

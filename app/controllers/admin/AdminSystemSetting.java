@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import annotation.hmcore.Check;
-import annotation.hmcore.For;
-import annotation.hmcore.Login;
+import annotations.Check;
+import annotations.For;
+import annotations.Login;
 import controllers.AdminActionIntercepter;
 import controllers.CRUD;
 import controllers.Secure;

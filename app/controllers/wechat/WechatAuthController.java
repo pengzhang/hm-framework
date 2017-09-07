@@ -13,9 +13,9 @@ import play.Play;
 import play.cache.Cache;
 import play.libs.WS;
 import play.mvc.Controller;
-import plugins.hmcore.router.Get;
-import utils.hmcore.EmojiFilter;
-import utils.hmcore.Json;
+import plugins.router.Get;
+import utils.EmojiFilter;
+import utils.Json;
 
 public class WechatAuthController extends Controller{
 

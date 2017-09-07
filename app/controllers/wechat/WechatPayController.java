@@ -9,14 +9,14 @@ import controllers.wechat.model.WechatPayData;
 import controllers.wechat.model.WechatResponseBody;
 import controllers.wechat.util.JaxbParser;
 import controllers.wechat.util.WechatUtil;
-import exceptions.hmcore.WechatPayException;
+import exceptions.WechatPayException;
 import models.hmcore.common.ResponseData;
 import models.hmcore.order.Order;
 import play.Logger;
 import play.mvc.Controller;
-import plugins.hmcore.router.Get;
-import plugins.hmcore.router.Post;
-import utils.hmcore.Json;
+import plugins.router.Get;
+import plugins.router.Post;
+import utils.Json;
 
 public class WechatPayController extends Controller {
 

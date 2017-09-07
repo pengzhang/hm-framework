@@ -29,9 +29,9 @@ import com.qiniu.util.Auth;
 import com.qiniu.util.Json;
 import com.qiniu.util.StringMap;
 
-import annotation.hmcore.Api;
-import annotation.hmcore.Param;
-import annotation.hmcore.Return;
+import annotations.Api;
+import annotations.Param;
+import annotations.Return;
 import models.hmcore.assist.Attachment;
 import models.hmcore.common.ResponseData;
 import models.hmcore.common.Simditor;
@@ -43,8 +43,8 @@ import play.db.jpa.Blob;
 import play.libs.Images;
 import play.libs.MimeTypes;
 import play.mvc.Controller;
-import plugins.hmcore.router.Get;
-import plugins.hmcore.router.Post;
+import plugins.router.Get;
+import plugins.router.Post;
 
 public class Assist extends Controller {
 

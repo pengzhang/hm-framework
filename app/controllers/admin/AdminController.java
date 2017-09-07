@@ -11,11 +11,11 @@ import java.util.Map;
 
 import com.qiniu.util.Json;
 
-import annotation.hmcore.Api;
-import annotation.hmcore.Check;
-import annotation.hmcore.Login;
-import annotation.hmcore.Param;
-import annotation.hmcore.Return;
+import annotations.Api;
+import annotations.Check;
+import annotations.Login;
+import annotations.Param;
+import annotations.Return;
 import controllers.AdminActionIntercepter;
 import controllers.Secure;
 import models.hmcore.common.ResponseData;
@@ -26,8 +26,8 @@ import play.PlayPlugin;
 import play.cache.Cache;
 import play.mvc.Controller;
 import play.mvc.With;
-import plugins.hmcore.router.Get;
-import utils.hmcore.PZDate;
+import plugins.router.Get;
+import utils.PZDate;
 
 @Login
 @Check("")

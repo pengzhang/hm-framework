@@ -7,8 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import annotation.hmcore.Login;
-import exceptions.hmcore.ControllerException;
+import annotations.Login;
+import exceptions.ControllerException;
 import models.hmcore.adminuser.Permission;
 import play.Logger;
 import play.Play;
@@ -18,7 +18,7 @@ import play.mvc.Before;
 import play.mvc.Catch;
 import play.mvc.Controller;
 import play.mvc.Finally;
-import tasks.hmcore.AccessLogTask;
+import tasks.AccessLogTask;
 
 public class AdminActionIntercepter extends Controller {
 

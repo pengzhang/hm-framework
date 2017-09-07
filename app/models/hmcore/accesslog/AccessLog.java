@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import play.db.jpa.Model;
-import utils.hmcore.Json;
+import utils.Json;
 
 @Entity
 @Table(name = "access_log")

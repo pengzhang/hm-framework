@@ -14,9 +14,9 @@ import org.apache.commons.lang.math.NumberUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import annotation.hmcore.Check;
-import annotation.hmcore.Login;
-import exceptions.hmcore.ServiceException;
+import annotations.Check;
+import annotations.Login;
+import exceptions.ServiceException;
 import models.hmcore.adminuser.AdminUser;
 import models.hmcore.adminuser.Permission;
 import models.hmcore.adminuser.Role;
@@ -31,8 +31,8 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.utils.Java;
-import plugins.hmcore.router.Get;
-import plugins.hmcore.router.Post;
+import plugins.router.Get;
+import plugins.router.Post;
 
 public class Secure extends Controller {
 

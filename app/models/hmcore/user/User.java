@@ -6,8 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import annotation.hmcore.Hidden;
-import annotation.hmcore.Upload;
+import annotations.Hidden;
+import annotations.Upload;
 import models.BaseModel;
 import play.data.validation.Password;
 

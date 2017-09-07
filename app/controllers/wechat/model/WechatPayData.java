@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import exceptions.hmcore.WechatPayException;
+import exceptions.WechatPayException;
 
 /**
  * 微信订单基本类

@@ -15,10 +15,10 @@ import org.apache.commons.lang.StringUtils;
 
 import com.google.gson.Gson;
 
-import annotation.hmcore.Exclude;
-import annotation.hmcore.For;
-import annotation.hmcore.Hidden;
-import annotation.hmcore.Upload;
+import annotations.Exclude;
+import annotations.For;
+import annotations.Hidden;
+import annotations.Upload;
 import models.hmcore.accesslog.AccessLog;
 import play.Logger;
 import play.Play;
@@ -35,7 +35,7 @@ import play.mvc.Controller;
 import play.mvc.Router;
 import play.mvc.With;
 import play.utils.Java;
-import utils.hmcore.SystemStatus;
+import utils.SystemStatus;
 
 @With(Secure.class)
 public abstract class CRUD extends Controller {
