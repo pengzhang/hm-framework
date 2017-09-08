@@ -24,7 +24,7 @@ public class AdminActionIntercepter extends Controller {
 
 	@Before()
 	private static void actionBeforeProcess() {
-		AccessLogTask.record();
+		AccessLogTask.record(request);
 	}
 
 	@After

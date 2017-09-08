@@ -14,7 +14,7 @@ public class ActionIntercepter extends Controller {
 
 	@Before()
 	private static void actionBeforeProcess() {
-		AccessLogTask.record();
+		AccessLogTask.record(request);
 		
 		//是否必须微信访问
 		String wxLoginNeed = Play.configuration.getProperty("wechat.loginneed", "false");
