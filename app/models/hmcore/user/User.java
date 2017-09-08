@@ -1,11 +1,13 @@
 package models.hmcore.user;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import annotations.Exclude;
 import annotations.Hidden;
 import annotations.Upload;
 import models.BaseModel;
@@ -28,6 +30,9 @@ public class User extends BaseModel implements Serializable {
 	
 	@Column(columnDefinition="varchar(30) comment '手机号'")
 	public String mobile;
+	
+	@Column(columnDefinition="datetime comment '出生日期'")
+	public Date birthdate = new Date();
 	
 	@Upload
 	@Column(columnDefinition="varchar(1000) comment '用户头像'")

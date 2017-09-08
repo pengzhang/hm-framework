@@ -98,6 +98,7 @@ roles=角色列表
 
 AdminUsers=用户管理
 User=用户
+birthdate=出生日期
 
 AdminRoles=角色管理
 Role=角色
