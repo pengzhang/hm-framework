@@ -17,7 +17,7 @@ import play.jobs.OnApplicationStart;
 public class SyncSystemSettingTask extends Job{
 
 	public void doJob() {
-		List<SystemSetting> sets = SystemSetting.findAll();
+		List<SystemSetting> sets = SystemSetting.all().fetch();
 		for(SystemSetting set : sets) {
 			Play.configuration.setProperty(set.settingKey, set.settingValue);
 		}
