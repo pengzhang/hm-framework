@@ -72,11 +72,12 @@ public class User extends BaseModel implements Serializable {
 	public User() {
 		super();
 	}
-
-	public User(String username, String password) {
+	
+	public User(String username) {
 		super();
 		this.username = username;
-		this.password = password;
+		this.mobile = username;
+		this.avatar = username;
 	}
 	
 	@Override
