@@ -41,9 +41,14 @@ public class AdminController extends Controller{
 
 	@Get("/admin/cache/clear")
 	public static void clearCache() {
-		long access =  Cache.get(PZDate.today(), Long.class);
+		String key = PZDate.today();
+		long access =  Cache.get(key, Long.class);
+		long pc =  Cache.get(key+"_pc", Long.class);
+		long mobile =  Cache.get(key+"_mobile", Long.class);
 		Cache.clear();
-		Cache.set(PZDate.today(), access);
+		Cache.set(key, access);
+		Cache.set(key+"_pc", pc);
+		Cache.set(key+"_mobile", mobile);
 		flash.success("清除缓存成功");
 		redirect("/admin/info");
 	}
