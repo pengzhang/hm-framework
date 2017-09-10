@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import annotations.Exclude;
 import annotations.For;
 import annotations.Hidden;
+import annotations.SessionUser;
 import annotations.Upload;
 import models.hmcore.accesslog.AccessLog;
 import play.Logger;
@@ -150,6 +151,10 @@ public abstract class CRUD extends Controller {
         			}
 
         		}
+        		if( f.isAnnotationPresent(SessionUser.class)){
+        			f.set(object, StringUtils.defaultIfEmpty(session.get("username"), ""));
+
+        		}
         		if( f.getName().equals("updateDate")){
         			f.set(object, new Date());
         		}
@@ -200,6 +205,10 @@ public abstract class CRUD extends Controller {
 	        if( f.isAnnotationPresent(Password.class)){
 	        	f.set(object, Crypto.passwordHash(StringUtils.defaultString((String)f.get(object),"")));
 	        }
+	        if( f.isAnnotationPresent(SessionUser.class)){
+    			f.set(object, StringUtils.defaultIfEmpty(session.get("username"), ""));
+
+    		}
         }
         object._save();
         flash.success(play.i18n.Messages.get("crud.created", type.modelName));

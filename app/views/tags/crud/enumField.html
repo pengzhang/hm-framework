@@ -17,7 +17,7 @@
 	                label = it.toString()
 	
 	        }%
-	        <option name="${it.name()}" ord="${it.ordinal()}" value="${it.name()}" ${selected ? 'selected="true"'.raw() : ''}>${label}</option>
+	        <option name="${it.name()}" ord="${it.ordinal()}" value="${it.name()}" ${selected ? 'selected="true"'.raw() : ''}>&{label}</option>
 	        %{ } }%
 	</select>
 	
