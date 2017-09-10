@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import controllers.CRUD;
+import controllers.CRUD.ObjectType;
 import models.hmcore.adminuser.AdminUser;
 import models.hmcore.adminuser.Permission;
+import models.hmcore.setting.AdminMenu;
 import models.hmcore.setting.SystemSetting;
 import play.Play;
 import play.jobs.Job;
@@ -25,6 +28,7 @@ public class InitDataTask extends Job{
 		initAdmin();
 		initPermissions();
 		initAccessLog();
+		allNavMenu();
 	}
 	
 	/**
@@ -99,6 +103,16 @@ public class InitDataTask extends Job{
 		if(!keys.contains(key)) {
 			new SystemSetting(key, value).save();
 			Play.configuration.setProperty(key, value);
+		}
+	}
+	
+	private static void allNavMenu(){
+		List<Class> classes =Play.classloader.getAssignableClasses(CRUD.class);
+		for(Class clazz: classes){
+			AdminMenu menu = AdminMenu.find("controllerName=?", clazz.getSimpleName()).first();
+			if(menu == null){
+				new AdminMenu(clazz.getSimpleName(), ObjectType.get(clazz).modelName, 0).save();
+			}
 		}
 	}
 

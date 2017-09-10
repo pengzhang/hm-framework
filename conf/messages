@@ -147,7 +147,10 @@ wechat.loginneed=仅支持微信访问
 wechat.snsapi=微信登录授权方式
 wechat.binduser=支持微信绑定
 
-
+AdminMenus=后台菜单管理
+AdminMenu=后台菜单
+controllerName=后台菜单
+seq=排序
 
 
 
