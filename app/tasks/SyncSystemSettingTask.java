@@ -2,7 +2,9 @@ package tasks;
 
 import java.util.List;
 
+
 import models.hmcore.setting.SystemSetting;
+import play.Logger;
 import play.Play;
 import play.jobs.Every;
 import play.jobs.Job;
@@ -17,10 +19,14 @@ import play.jobs.OnApplicationStart;
 public class SyncSystemSettingTask extends Job{
 
 	public void doJob() {
-		List<SystemSetting> sets = SystemSetting.all().fetch();
-		for(SystemSetting set : sets) {
-			Play.configuration.setProperty(set.settingKey, set.settingValue);
+		try {
+			List<SystemSetting> sets = SystemSetting.all().fetch();
+			for(SystemSetting set : sets) {
+				Play.configuration.setProperty(set.settingKey, set.settingValue);
+			}
+		}catch(Exception e) {
+			Logger.info("syn system setting task error: %s", e.getMessage());
 		}
 	}
-	
+
 }

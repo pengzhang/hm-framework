@@ -116,7 +116,7 @@ public class AdminController extends Controller{
 							ret.put("result", "输出流");
 						}else {
 							try {
-								ret.put("result", Json.encode(ResponseData.response(true, new Simditor(), "message")));
+								ret.put("result", Json.encode(ResponseData.response(true, r.clazz().newInstance(), "message")));
 							} catch (Exception e) {
 								ret.put("result", "数据转换异常");
 							}
