@@ -20,9 +20,12 @@ import annotations.For;
 import annotations.Hidden;
 import annotations.SessionUser;
 import annotations.Upload;
+import controllers.admin.AdminMenus;
 import models.hmcore.accesslog.AccessLog;
+import models.hmcore.setting.AdminMenu;
 import play.Logger;
 import play.Play;
+import play.cache.Cache;
 import play.data.binding.Binder;
 import play.data.validation.MaxSize;
 import play.data.validation.Password;
@@ -428,8 +431,13 @@ public abstract class CRUD extends Controller {
 		}
 		
         public int compareTo(ObjectType other) {
-        	//TODO 实现比较
-            return modelName.compareTo(other.modelName);
+        	int i = 0;
+        	try {
+        		i = AdminMenus.menuCompareTo(modelName, other.modelName);
+        	}catch(Exception e) {
+        		i = modelName.compareTo(other.modelName);
+        	}
+        	return i;
         }
 
         @Override

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.math.NumberUtils;
+
 import com.qiniu.util.Json;
 
 import annotations.Api;
@@ -45,10 +47,12 @@ public class AdminController extends Controller{
 	@Get("/admin/cache/clear")
 	public static void clearCache() {
 		String key = PZDate.today();
-		long access =  Cache.get(key, Long.class);
-		long pc =  Cache.get(key+"_pc", Long.class);
-		long mobile =  Cache.get(key+"_mobile", Long.class);
+		long access = NumberUtils.toLong(String.valueOf(Cache.get(key)),0L);
+		long pc =   NumberUtils.toLong(String.valueOf(Cache.get(key+"_pc")),0L);
+		long mobile =   NumberUtils.toLong(String.valueOf(Cache.get(key+"_mobile")),0L);
+		
 		Cache.clear();
+		
 		Cache.set(key, access);
 		Cache.set(key+"_pc", pc);
 		Cache.set(key+"_mobile", mobile);
