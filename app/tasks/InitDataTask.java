@@ -46,12 +46,15 @@ public class InitDataTask extends Job{
 	 * 扫码Router生成
 	 */
 	public static void initPermissions(){
-		Iterator it = Router.routes.iterator();
-		while(it.hasNext()){
-			Route route = (Route) it.next();
-			Permission permission = Permission.find("action", route.action).first();
-			if(permission == null){
-				new Permission(route.action, route.action, route.path).save();
+		String flag = Play.configuration.getProperty("init.permissions", "false");
+		if(flag.equals("true")) {
+			Iterator it = Router.routes.iterator();
+			while(it.hasNext()){
+				Route route = (Route) it.next();
+				Permission permission = Permission.find("action", route.action).first();
+				if(permission == null){
+					new Permission(route.action, route.action, route.path).save();
+				}
 			}
 		}
 	}
