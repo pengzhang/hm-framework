@@ -15,7 +15,7 @@ import play.jobs.OnApplicationStart;
  * @author zp
  *
  */
-@Every("5s")
+@Every("30mn")
 public class SyncSystemSettingTask extends Job{
 
 	public void doJob() {

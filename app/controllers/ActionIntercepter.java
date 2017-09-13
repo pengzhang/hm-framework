@@ -30,16 +30,7 @@ public class ActionIntercepter extends Controller {
 
 	@After
 	private static void actionAfterProcess() {
-		Object status = renderArgs.get("status");
-		Object data = renderArgs.get("data");
-		Object message = renderArgs.get("message");
 		
-		if(request.format.equals("json")) {
-			renderJSON(ResponseData.response((boolean)status, data, (String)message));
-		}else if(request.format.equals("xml")){
-			renderXml(ResponseData.response((boolean)status, data, (String)message));
-		}
-		render();
 	}
 
 	@Catch(value = Throwable.class, priority = 1)

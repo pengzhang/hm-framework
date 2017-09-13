@@ -100,6 +100,9 @@ public class InitDataTask extends Job{
 		setSetting(keys,"wechat.loginneed", "true");
 		setSetting(keys,"wechat.binduser", "false");
 		
+		setSetting(keys,"init.permissions", "false");
+		
+		
 	}
 
 	private static void setSetting(List keys, String key, String value) {
