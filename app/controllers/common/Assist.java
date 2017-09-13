@@ -135,7 +135,7 @@ public class Assist extends Controller {
 				Response res = uploadManager.put(file.getPath(), RandomStringUtils.randomAlphanumeric(6) + "/" + file.getName(), auth.uploadToken(BUCKETNAME));
 				
 				// 打印返回的信息
-				renderJSON(new Simditor(true, "upload success", DOMAIN + res.jsonToMap().get("key")));
+				renderJSON(new Simditor(true, "upload success", DOMAIN +"/"+ res.jsonToMap().get("key")));
 			} catch (QiniuException e) {
 				Response r = e.response;
 				// 请求失败时打印的异常的信息
