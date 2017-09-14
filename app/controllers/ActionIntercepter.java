@@ -27,6 +27,13 @@ public class ActionIntercepter extends Controller {
 			}
 		}
 	}
+	
+	@Before
+	public static void devDefaultUser() {
+		if(Play.mode.isDev()) {
+			session.put("uid", 1);
+		}
+	}
 
 	@After
 	private static void actionAfterProcess() {
