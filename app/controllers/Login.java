@@ -20,7 +20,7 @@ import utils.UserAgentUtil;
 
 public class Login extends Controller {
 
-	@Before(unless= {"login","loginAction","binduser","bindUserAction"})
+	@Before(unless= {"login","miniLogin","miniRegister","loginAction","binduser","bindUserAction"})
 	public static void checkLogin() {
 
 		// 如果浏览器是微信进行授权操作
@@ -67,6 +67,16 @@ public class Login extends Controller {
 	public static void login() {
 		boolean isDev = Play.mode.isDev();
 		render(isDev);
+	}
+	
+	@Get("/user/mini/login")
+	public static void miniLogin() {
+		render();
+	}
+	
+	@Get("/user/mini/register")
+	public static void miniRegister() {
+		render();
 	}
 
 	@Post("/user/login")
