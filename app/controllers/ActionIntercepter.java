@@ -1,8 +1,8 @@
 package controllers;
 
-import com.qiniu.util.Json;
+import java.lang.reflect.Method;
 
-import models.hmcore.common.ResponseData;
+import annotations.DefaultPageParam;
 import play.Logger;
 import play.Play;
 import play.mvc.After;
@@ -16,7 +16,7 @@ import utils.UserAgentUtil;
 public class ActionIntercepter extends Controller {
 
 	@Before()
-	private static void actionBeforeProcess() {
+	static void actionBeforeProcess() {
 		AccessLogTask.record(request);
 		
 		//是否必须微信访问
@@ -29,19 +29,42 @@ public class ActionIntercepter extends Controller {
 	}
 	
 	@Before
-	public static void devDefaultUser() {
+	static void devDefaultUser() {
 		if(Play.mode.isDev()) {
 			session.put("uid", 1);
 		}
 	}
+	
+	@Before
+	static void defaultPageParam() throws Exception{
+		Class controller = Class.forName("controllers." + request.action.substring(0, request.action.lastIndexOf(".")));
+		Method[] methods = controller.getMethods();
+		for(Method method : methods) {
+			if(method.isAnnotationPresent(DefaultPageParam.class)  && request.actionMethod.equals(method.getName())) {
+				String page = request.params.get("page");
+				if(page == null) {
+					request.params.put("page", "1");
+				}else if(Integer.parseInt(page) < 1) {
+					request.params.put("page", "1");
+				}
+				
+				String size = request.params.get("size");
+				if(size == null) {
+					request.params.put("size", "10");
+				}else if(Integer.parseInt(size) < 1) {
+					request.params.put("size", "10");
+				}
+			}
+		}
+	}
 
 	@After
-	private static void actionAfterProcess() {
+	static void actionAfterProcess() {
 		
 	}
 
 	@Catch(value = Throwable.class, priority = 1)
-	private static void actionExceptionProcess(Throwable throwable) {
+	static void actionExceptionProcess(Throwable throwable) {
 		throwable.printStackTrace();
 		Logger.error("exception %s", throwable.getMessage());
 		error(throwable.getMessage());
