@@ -16,4 +16,6 @@ public @interface Login {
 	 * @return
 	 */
 	String[] unless() default {};
+	
+	String[] only() default {};
 }
